@@ -1,0 +1,193 @@
+﻿{% extends 'layout.html' %}
+
+{% block js%}
+<script type="text/javascript">
+$(function () {
+
+    	// Radialize the colors
+		Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+		    return {
+		        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+		        stops: [
+		            [0, color],
+		            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+		        ]
+		    };
+		});
+
+		// Build the chart
+        $('#chart1').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Electric Cars in USA - 2013 '
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Electric cars',
+
+                data: [
+                    {% for company in company_data %}
+                    ['{{ company.CompanyName }}', {{ company.thirteen }}],
+                    {% endfor %}
+                ]
+            }]
+        });
+
+		// Build the chart
+        $('#chart2').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Electric cars in USA - 2012'
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Electric cars',
+                data: [
+                    {% for company in company_data %}
+                    {% if company.twelve > 0.00 %}
+                    ['{{ company.CompanyName }}', {{ company.twelve }}],
+                    {% endif %}
+                    {% endfor %}
+                ]
+            }]
+        });
+		// Build the chart
+        $('#chart3').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Electric cars in USA - 2010 and 2011'
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Electric cars',
+                data: [
+                    {% for company in company_data %}
+                    {% if company.eleven > 0.00 %}
+                    ['{{ company.CompanyName }}', {{ company.eleven }}],
+                    {% endif %}
+                    {% endfor %}
+                ]
+            }]
+        });
+    });
+</script>
+
+{% endblock %}
+
+        {% block body %}
+            <div class="large-12 columns" style="font: 16px Electrolize;">
+                <div id="itemHover" class="panel" style="background:  #f2f2f2;" >
+                    <center>
+                        <h3  style="font: 16px Electrolize;">
+                            Ruling companies in the world of electric cars :
+                        </h3>
+<table>
+                        <tr><td>Chevrolet</td><td>Nissan</td><td>Mitsubishi</td></tr>
+<tr><td>Toyota</td><td>Ford</td><td>Honda</td></tr>
+<tr><td>Tesla</td><td>Smart</td><td>Fiat</td></tr>
+</table>                    </center>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <center>
+                    <div class="large-12 columns">
+                                <div id="Div4" class="">
+                                    <center>
+                                     <div id="chart1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </center>
+                                </div>
+                    </div>
+                </center>
+            </div>
+            <div class="row">
+                <center>
+                    <div class="large-12 columns">
+                                <div id="Div4" class="">
+                                    <center>
+                                     <div id="chart2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </center>
+                                </div>
+                    </div>
+                </center>
+            </div>
+            <br />
+            <br />
+            <br/>
+            <div class="row">
+                <center>
+                    <div class="large-12 columns">
+                                <div id="Div4" class="">
+                                    <center>
+                                     <div id="chart3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </center>
+                                </div>
+                    </div>
+                </center>
+            </div>
+
+        {% endblock %}

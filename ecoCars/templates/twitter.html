@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+        {% block js %}
+        <script type='text/javascript'>
+$(function()
+{
+	$('.scroll-pane').jScrollPane();
+});
+
+$(window).load(function(){
+$('#wcont1b ul').jScrollPane();
+});
+</script>
+        {% endblock %}
+
+    {% block style %}
+<style>
+    #box{
+    padding: 20px;
+    }
+    #box ul{ max-height: 500px; overflow-y: scroll; }
+</style>
+    {% endblock %}
+
+{% block body %}
+<div class="six columns" id="box" >
+<ul class="pricing-table" >
+    <center><li class="title"><h1>Tweet tweet!</h1></li></center>
+      {% for tweet, user in tweets.items %}
+        <li class="price" style="align:left;"><b><div style="color: #333333;">{{ user }}&nbsp : &nbsp</div></b>{{ tweet }}</li>
+        {% endfor %}
+</ul>
+</div>
+
+
+
+{% endblock %}

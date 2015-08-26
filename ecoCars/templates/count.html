@@ -1,0 +1,210 @@
+﻿{% extends 'layout.html' %}
+{% block js %}
+    <script type="text/javascript">
+$(function () {
+        $('#chart1').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Trend of Electric Cars'
+            },
+            xAxis: {
+                categories: [
+                {% for e in electric %}
+                    '{{ e.year }}',
+                {% endfor %}
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y:1f}</b>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Electric cars',
+                data: [
+                {% for e in electric %}
+                {{ e.count }},
+                {% endfor %}
+                 ]
+
+            }]
+        });
+    });
+
+$(function () {
+        $('#chart2').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Count of gasoline cars per year'
+            },
+            xAxis: {
+                categories: [
+                {% for g in gas %}
+                    '{{ g.year }}',
+                {% endfor %}
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y:1f}</b>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Gasoline cars',
+                data: [
+                {% for g in gas %}
+                {{ g.count }},
+                {% endfor %}
+                 ]
+
+            }]
+        });
+    });
+$(function () {
+        $('#chart3').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Growth of electric cars per year'
+            },
+            xAxis: {
+                categories: [
+                {% for g in growth %}
+                    '{{ g.year }}',
+                {% endfor %}
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y:1f}</b>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Electric cars',
+                data: [
+                {% for g in growth %}
+                {{ g.count }},
+                {% endfor %}
+                 ]
+
+            }]
+        });
+    });
+
+    </script>
+    {% endblock %}
+
+{% block body %}
+            <div class="large-12 columns">
+                <div class="panel">
+                    <center>
+                        <h3  style="font: 12px Electrolize;">
+                            Current Car Count (until October 2013) : 214099</h3>
+                    </center>
+                </div>
+            </div>
+            <br />
+            <br />
+                <div class="large-12 columns">
+                    <div id='basic-modal-1'>
+                            <div id="Div1" class="">
+                                <center>
+                                <div id="chart1" style="min-width:10px; height: 400px; margin: 0 auto"></div>
+                                </center>
+                            </div>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <div id='basic-modal-2'>
+                            <div id="Div3" class="">
+                                <center>
+                                <div id="chart2" style="min-width:10px; height: 400px; margin: 0 auto"></div>
+                                </center>
+                            </div>
+                    </div>
+                </div>
+            <br />
+            <br />
+                <center>
+                    <div class=" ">
+                        <div id='basic-modal-3'>
+                                <div id="Div4" class="">
+                                    <center>
+                                <div id="chart3" style="min-width:10px; height: 400px; margin: 0 auto"></div>
+                                    </center>
+                                </div>
+                        </div>
+                    </div>
+                </center>
+            <div id="basic-modal-content-1" style="display: none">
+                <div id="itemHover" class="panel">
+                    <center>
+                      <div id="chart1" style="min-width:10px; height: 400px; margin: 0 auto"></div>
+                    </center>
+                </div>
+            </div>
+            <div id="basic-modal-content-2" style="display: none">
+                <div id="itemHover" class="panel">
+                    <center>
+                      <div id="chart2" style="min-width:10px; height: 400px; margin: 0 auto"></div>
+                    </center>
+                </div>
+            </div>
+            <div id="basic-modal-content-3" style="display: none">
+                <div id="itemHover" class="panel">
+                    <center>
+                       <div id="chart3" style="min-width:10px; height: 400px; margin: 0 auto"></div>
+                    </center>
+                </div>
+            </div>
+            <!-- preload the images -->
+            <div style='display: none'>
+                <img src="../static/img/x.png" />
+            </div>
+        </div>
+    </div>
+{% endblock %}
